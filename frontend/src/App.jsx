@@ -36,5 +36,5 @@ const Root = () => {
   const isAuthenticated = localStorage.getItem('token');
 
   //Redirect to dashboard if authenticated else redirect to signin
-  return isAuthenticated ? (<Navigate to="/dashboard" />) : (<Navigate to="/signin" />);
+  return isAuthenticated ? (<Navigate to="/dashboard" />) : (<Navigate to="/login" />);
 }
