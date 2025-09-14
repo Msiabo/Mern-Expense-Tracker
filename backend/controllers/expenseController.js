@@ -3,27 +3,35 @@ const xlsx = require('xlsx');
 const { Types, isValidObjectId } = require('mongoose');
 
 // Add Expense
-exports.addExpense = async (req, res) => {
-    const { icon, amount, source, date, description } = req.body;
+exports.addExpense = [
+  upload.single('icon'), // 'icon' matches the input field name from frontend
+  async (req, res) => {
+    const { amount, source, date, description } = req.body;
     if (!amount || !source || !date) {
-        return res.status(400).json({ message: 'Please provide all required fields' });
+      return res.status(400).json({ message: 'Please provide all required fields' });
     }
+
     try {
-        const expense = new Expense({
-            userId: req.user._id,
-            icon,
-            amount,
-            source,
-            date,
-            description
-        });
-        await expense.save();
-        res.status(201).json({ message: 'Expense added successfully', expense });
+      // Use Cloudinary URL if image uploaded
+      const iconUrl = req.file ? req.file.path : null;
+
+      const expense = new Expense({
+        userId: req.user._id,
+        icon: iconUrl,
+        amount,
+        source,
+        date,
+        description,
+      });
+
+      await expense.save();
+      res.status(201).json({ message: 'Expense added successfully', expense });
     } catch (error) {
-        console.error('Error adding expense:', error);
-        res.status(500).json({ message: 'Server Error', error: error.message });
+      console.error('Error adding expense:', error);
+      res.status(500).json({ message: 'Server Error', error: error.message });
     }
-};
+  }
+];
 
 // Get All Expenses for User
 exports.getExpenses = async (req, res) => {
