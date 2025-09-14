@@ -24,13 +24,15 @@ router.post('/logout', (req, res) => {
 router.put('/update', protect, updateUserInfo);
 
 // Upload Profile Image (Cloudinary)
-router.post("/uploadProfileImage", protect, upload.single("image"), (req, res) => {
+router.post(
+  "/uploadProfileImage",
+  upload.single("image"),
+  (req, res) => {
     if (!req.file || !req.file.path) {
-        return res.status(400).json({ message: 'No file uploaded' });
+      return res.status(400).json({ message: "No file uploaded" });
     }
-
-    // req.file.path contains the Cloudinary URL
     res.status(200).json({ imageUrl: req.file.path });
-});
+  }
+);
 
 module.exports = router;
