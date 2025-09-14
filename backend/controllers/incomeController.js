@@ -52,10 +52,14 @@ exports.deleteIncome = async (req, res) => {
         if (!income) {
             return res.status(404).json({ message: 'Income not found' });
         }
+
         if (income.userId.toString() !== req.user.id) {
             return res.status(401).json({ message: 'Not authorized' });
         }
-        await income.remove();
+
+        // Use deleteOne() instead of remove()
+        await income.deleteOne();
+
         res.status(200).json({ message: 'Income deleted successfully' });
     } catch (error) {
         console.error('Error deleting income:', error);
