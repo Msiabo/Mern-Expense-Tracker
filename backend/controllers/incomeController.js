@@ -13,7 +13,7 @@ exports.addIncome = [
     }
 
     try {
-      const iconUrl = req.file ? `/uploads/${req.file.filename}` : null;
+      const iconUrl = req.file ? req.file.path : null;
 
       const income = new Income({
         userId: req.user.id,
