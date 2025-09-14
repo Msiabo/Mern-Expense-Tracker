@@ -1,5 +1,5 @@
-export const API_BASE_URL = 'https://localhost:5000';
-//https://mern-expense-tracker-iota.vercel.app
+export const API_BASE_URL = 'https://mern-expense-tracker-iota.vercel.app';
+
 
 export const API_PATHS = {
     AUTH : {

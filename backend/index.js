@@ -12,7 +12,10 @@ const app = express();
 // Global CORS for all routes
 app.use(
   cors({
-    origin: "https://mern-expense-tracker-wheh.vercel.app",
+    origin: [
+      "https://mern-expense-tracker-wheh.vercel.app", // deployed frontend
+      "http://localhost:5173" // local frontend
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

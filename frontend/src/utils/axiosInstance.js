@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from './apiPaths';
+import { API_BASE_URL } from './apiPath';
 
 const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
